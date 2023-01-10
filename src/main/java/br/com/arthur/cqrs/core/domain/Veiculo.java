@@ -1,4 +1,4 @@
-package br.com.arthur.cqrs.domain;
+package br.com.arthur.cqrs.core.domain;
 
 public class Veiculo {
     private String marca;

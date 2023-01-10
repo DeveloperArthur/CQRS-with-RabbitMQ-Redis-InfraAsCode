@@ -1,6 +1,6 @@
 package br.com.arthur.cqrs.unittests;
 
-import br.com.arthur.cqrs.domain.Veiculo;
+import br.com.arthur.cqrs.core.domain.Veiculo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
