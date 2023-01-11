@@ -4,6 +4,8 @@ import br.com.arthur.cqrs.adapters.CachingService;
 import br.com.arthur.cqrs.adapters.ReadDatabase;
 import br.com.arthur.cqrs.core.domain.Veiculo;
 
+import java.util.Optional;
+
 public class QueryService {
     private ReadDatabase readDatabase;
     private CachingService cachingService;
@@ -13,7 +15,18 @@ public class QueryService {
         this.cachingService = cachingService;
     }
 
-    public Veiculo read(String placa) {
-        return readDatabase.read(placa);
+    public Optional<Veiculo> read(String placa) {
+        Optional<Veiculo> veiculoOptional;
+        veiculoOptional = cachingService.get(placa);
+        if (veiculoOptional.isPresent()){
+            return veiculoOptional;
+        } else {
+            veiculoOptional = readDatabase.read(placa);
+            if (veiculoOptional.isPresent()){
+                cachingService.salva(veiculoOptional.get());
+                return veiculoOptional;
+            }
+        }
+        return Optional.empty();
     }
 }

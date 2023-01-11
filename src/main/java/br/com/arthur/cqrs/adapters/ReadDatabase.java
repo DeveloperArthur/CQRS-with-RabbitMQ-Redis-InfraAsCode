@@ -2,6 +2,8 @@ package br.com.arthur.cqrs.adapters;
 
 import br.com.arthur.cqrs.core.domain.Veiculo;
 
+import java.util.Optional;
+
 public interface ReadDatabase {
-    Veiculo read(String placa);
+    Optional<Veiculo> read(String placa);
 }

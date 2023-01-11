@@ -3,9 +3,13 @@ package br.com.arthur.cqrs.integrationtests.mocks;
 import br.com.arthur.cqrs.adapters.WriteDatabase;
 import br.com.arthur.cqrs.core.domain.Veiculo;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class WriteDatabaseMock implements WriteDatabase {
+    public static Map<String, Veiculo> veiculosWriteDBMock = new HashMap<>();
     @Override
     public void write(Veiculo veiculo) {
-        VeiculosDatabaseMock.veiculosDBMock.put(veiculo.getPlaca(), veiculo);
+        veiculosWriteDBMock.put(veiculo.getPlaca(), veiculo);
     }
 }

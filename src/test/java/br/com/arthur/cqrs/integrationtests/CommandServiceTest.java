@@ -4,7 +4,6 @@ import br.com.arthur.cqrs.adapters.QueueMessenger;
 import br.com.arthur.cqrs.core.service.CommandService;
 import br.com.arthur.cqrs.core.domain.Veiculo;
 import br.com.arthur.cqrs.integrationtests.mocks.QueueMessengerMock;
-import br.com.arthur.cqrs.integrationtests.mocks.VeiculosDatabaseMock;
 import br.com.arthur.cqrs.integrationtests.mocks.WriteDatabaseMock;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -28,8 +27,8 @@ public class CommandServiceTest {
         CommandService command = new CommandService(new WriteDatabaseMock(), new QueueMessengerMock());
         command.write(veiculo);
 
-        //checar no banco se o veiculo existe
-        Veiculo veiculoNoBanco = VeiculosDatabaseMock.veiculosDBMock.get(veiculo.getPlaca());
+        //checar se o veiculo existe no banco
+        Veiculo veiculoNoBanco = WriteDatabaseMock.veiculosWriteDBMock.get(veiculo.getPlaca());
         Assertions.assertNotNull(veiculoNoBanco);
     }
 
