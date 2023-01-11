@@ -17,8 +17,9 @@ public class SalvaVeiculo {
         this.queueMessenger = queueMessenger;
     }
 
-    public void write(Veiculo veiculo) {
+    public Veiculo write(Veiculo veiculo) {
         writeDatabase.write(veiculo);
         queueMessenger.envia(veiculo);
+        return veiculo;
     }
 }
