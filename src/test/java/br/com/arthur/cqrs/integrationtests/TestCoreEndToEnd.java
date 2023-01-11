@@ -1,8 +1,8 @@
 package br.com.arthur.cqrs.integrationtests;
 
 import br.com.arthur.cqrs.core.domain.Veiculo;
-import br.com.arthur.cqrs.core.service.CommandService;
-import br.com.arthur.cqrs.core.service.QueryService;
+import br.com.arthur.cqrs.core.service.SalvaVeiculo;
+import br.com.arthur.cqrs.core.service.ConsultaVeiculo;
 import br.com.arthur.cqrs.integrationtests.mocks.CachingServiceMock;
 import br.com.arthur.cqrs.integrationtests.mocks.QueueMessengerMock;
 import br.com.arthur.cqrs.integrationtests.mocks.ReadDatabaseMock;
@@ -24,7 +24,7 @@ public class TestCoreEndToEnd {
                 .comCor("Branco")
                 .build();
 
-        CommandService command = new CommandService(new WriteDatabaseMock(), new QueueMessengerMock());
+        SalvaVeiculo command = new SalvaVeiculo(new WriteDatabaseMock(), new QueueMessengerMock());
         command.write(veiculo);
 
         //checa se gravou no banco de write
@@ -32,7 +32,7 @@ public class TestCoreEndToEnd {
         //checa se a fila enviou o veiculo para o banco de read
         Assertions.assertNotNull(ReadDatabaseMock.veiculosReadDBMock.get(veiculo.getPlaca()));
 
-        QueryService query = new QueryService(new ReadDatabaseMock(), new CachingServiceMock());
+        ConsultaVeiculo query = new ConsultaVeiculo(new ReadDatabaseMock(), new CachingServiceMock());
         Optional<Veiculo> veiculoOptional = query.read(veiculo.getPlaca());
 
         //checa veiculo no banco de read, nao deve ser nulo

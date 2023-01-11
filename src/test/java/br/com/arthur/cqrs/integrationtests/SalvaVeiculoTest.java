@@ -1,7 +1,7 @@
 package br.com.arthur.cqrs.integrationtests;
 
 import br.com.arthur.cqrs.adapters.gateways.QueueMessenger;
-import br.com.arthur.cqrs.core.service.CommandService;
+import br.com.arthur.cqrs.core.service.SalvaVeiculo;
 import br.com.arthur.cqrs.core.domain.Veiculo;
 import br.com.arthur.cqrs.integrationtests.mocks.QueueMessengerMock;
 import br.com.arthur.cqrs.integrationtests.mocks.WriteDatabaseMock;
@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-public class CommandServiceTest {
+public class SalvaVeiculoTest {
 
     @Test
     public void deveGravarVeiculoNoWriteDatabase(){
@@ -24,7 +24,7 @@ public class CommandServiceTest {
                 .comCor("Amarelo")
                 .build();
 
-        CommandService command = new CommandService(new WriteDatabaseMock(), new QueueMessengerMock());
+        SalvaVeiculo command = new SalvaVeiculo(new WriteDatabaseMock(), new QueueMessengerMock());
         command.write(veiculo);
 
         //checar se o veiculo existe no banco
@@ -37,7 +37,7 @@ public class CommandServiceTest {
         QueueMessenger queueMessenger = mock(QueueMessenger.class);
 
         Veiculo veiculo = new Veiculo();
-        CommandService command = new CommandService(new WriteDatabaseMock(), queueMessenger);
+        SalvaVeiculo command = new SalvaVeiculo(new WriteDatabaseMock(), queueMessenger);
         command.write(veiculo);
 
         verify(queueMessenger).envia(veiculo);

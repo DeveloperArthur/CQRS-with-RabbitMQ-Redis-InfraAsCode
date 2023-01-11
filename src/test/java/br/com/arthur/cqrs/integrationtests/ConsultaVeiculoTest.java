@@ -3,7 +3,7 @@ package br.com.arthur.cqrs.integrationtests;
 import br.com.arthur.cqrs.adapters.gateways.CachingService;
 import br.com.arthur.cqrs.adapters.gateways.ReadDatabase;
 import br.com.arthur.cqrs.core.domain.Veiculo;
-import br.com.arthur.cqrs.core.service.QueryService;
+import br.com.arthur.cqrs.core.service.ConsultaVeiculo;
 import br.com.arthur.cqrs.integrationtests.mocks.CachingServiceMock;
 import br.com.arthur.cqrs.integrationtests.mocks.ReadDatabaseMock;
 import org.junit.jupiter.api.Assertions;
@@ -13,7 +13,7 @@ import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 
-public class QueryServiceTest {
+public class ConsultaVeiculoTest {
 
     @Test
     public void deveConsultarVeiculoNoReadDatabaseESalvarNoCache(){
@@ -30,7 +30,7 @@ public class QueryServiceTest {
 
         CachingService cachingService = mock(CachingService.class);
 
-        QueryService query = new QueryService(new ReadDatabaseMock(), cachingService);
+        ConsultaVeiculo query = new ConsultaVeiculo(new ReadDatabaseMock(), cachingService);
         Optional<Veiculo> veiculoOptional = query.read("MBY-1670");
 
         Assertions.assertNotNull(veiculoOptional.get());
@@ -52,7 +52,7 @@ public class QueryServiceTest {
 
         ReadDatabase readDatabase = mock(ReadDatabase.class);
 
-        QueryService query = new QueryService(readDatabase, new CachingServiceMock());
+        ConsultaVeiculo query = new ConsultaVeiculo(readDatabase, new CachingServiceMock());
         Optional<Veiculo> veiculoOptional = query.read("KDC-1191");
 
         Assertions.assertNotNull(veiculoOptional.get());

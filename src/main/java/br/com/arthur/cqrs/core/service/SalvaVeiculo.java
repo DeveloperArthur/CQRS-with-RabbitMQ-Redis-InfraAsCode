@@ -3,12 +3,16 @@ package br.com.arthur.cqrs.core.service;
 import br.com.arthur.cqrs.adapters.gateways.QueueMessenger;
 import br.com.arthur.cqrs.adapters.gateways.WriteDatabase;
 import br.com.arthur.cqrs.core.domain.Veiculo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-public class CommandService {
+@Service
+public class SalvaVeiculo {
     private WriteDatabase writeDatabase;
     private QueueMessenger queueMessenger;
 
-    public CommandService(WriteDatabase writeDatabase, QueueMessenger queueMessenger) {
+    @Autowired
+    public SalvaVeiculo(WriteDatabase writeDatabase, QueueMessenger queueMessenger) {
         this.writeDatabase = writeDatabase;
         this.queueMessenger = queueMessenger;
     }
