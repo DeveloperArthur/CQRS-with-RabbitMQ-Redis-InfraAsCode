@@ -1,7 +1,7 @@
 package br.com.arthur.cqrs.core.service;
 
-import br.com.arthur.cqrs.adapters.gateways.CachingService;
-import br.com.arthur.cqrs.adapters.gateways.ReadDatabase;
+import br.com.arthur.cqrs.core.gateways.CachingService;
+import br.com.arthur.cqrs.core.gateways.ReadDatabase;
 import br.com.arthur.cqrs.core.domain.Veiculo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
 package br.com.arthur.cqrs.core.service;
 
-import br.com.arthur.cqrs.adapters.gateways.QueueMessenger;
-import br.com.arthur.cqrs.adapters.gateways.WriteDatabase;
+import br.com.arthur.cqrs.core.gateways.QueueMessenger;
+import br.com.arthur.cqrs.core.gateways.WriteDatabase;
 import br.com.arthur.cqrs.core.domain.Veiculo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package br.com.arthur.cqrs.adapters.gateways;
+package br.com.arthur.cqrs.core.gateways;
 
 import br.com.arthur.cqrs.core.domain.Veiculo;
 
