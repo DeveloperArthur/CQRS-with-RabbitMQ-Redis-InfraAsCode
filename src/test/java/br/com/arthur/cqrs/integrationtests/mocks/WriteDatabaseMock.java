@@ -9,7 +9,8 @@ import java.util.Map;
 public class WriteDatabaseMock implements WriteDatabase {
     public static Map<String, Veiculo> veiculosWriteDBMock = new HashMap<>();
     @Override
-    public void write(Veiculo veiculo) {
+    public Veiculo write(Veiculo veiculo) {
         veiculosWriteDBMock.put(veiculo.getPlaca(), veiculo);
+        return veiculo;
     }
 }
