@@ -10,7 +10,7 @@ import java.util.Optional;
 public class ReadDatabaseMock implements ReadDatabase {
     public static Map<String, Veiculo> veiculosReadDBMock = new HashMap<>();
     @Override
-    public Optional<Veiculo> read(String placa) {
-        return Optional.of(veiculosReadDBMock.get(placa));
+    public Optional<Veiculo> read(String id) {
+        return Optional.of(veiculosReadDBMock.get(id));
     }
 }

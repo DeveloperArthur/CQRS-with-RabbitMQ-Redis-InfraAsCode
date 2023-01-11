@@ -14,8 +14,8 @@ public class QueryController {
     @Autowired
     CQRSApplication application;
 
-    @GetMapping("/{placa}")
-    public ResponseEntity<VeiculoDto> read(@PathVariable String placa){
-        return application.read(placa);
+    @GetMapping("/{id}")
+    public ResponseEntity<VeiculoDto> read(@PathVariable String id){
+        return application.read(id);
     }
 }

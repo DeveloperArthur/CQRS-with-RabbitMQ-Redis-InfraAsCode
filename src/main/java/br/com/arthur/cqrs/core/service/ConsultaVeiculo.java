@@ -19,10 +19,10 @@ public class ConsultaVeiculo {
         this.cachingService = cachingService;
     }
 
-    public Optional<Veiculo> read(String placa) {
-        Optional<Veiculo> veiculoNoCache = cachingService.get(placa);
+    public Optional<Veiculo> read(String id) {
+        Optional<Veiculo> veiculoNoCache = cachingService.get(id);
         if (veiculoNoCache.isEmpty()){
-            Optional<Veiculo> veiculoNoBanco = readDatabase.read(placa);
+            Optional<Veiculo> veiculoNoBanco = readDatabase.read(id);
             if (veiculoNoBanco.isPresent()) {
                 cachingService.salva(veiculoNoBanco.get());
                 return veiculoNoBanco;

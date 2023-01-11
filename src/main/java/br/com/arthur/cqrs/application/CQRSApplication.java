@@ -17,8 +17,8 @@ public class CQRSApplication {
     @Autowired
     SalvaVeiculo salvaVeiculo;
 
-    public ResponseEntity<VeiculoDto> read(String placa) {
-        Optional<Veiculo> veiculoOptional = consultaVeiculo.read(placa);
+    public ResponseEntity<VeiculoDto> read(String id) {
+        Optional<Veiculo> veiculoOptional = consultaVeiculo.read(id);
         if (veiculoOptional.isPresent())
             return ResponseEntity.ok(new VeiculoDto(veiculoOptional.get()));
 

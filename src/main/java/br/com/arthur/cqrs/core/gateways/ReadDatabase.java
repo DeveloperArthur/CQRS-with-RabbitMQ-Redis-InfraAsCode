@@ -5,5 +5,5 @@ import br.com.arthur.cqrs.core.domain.Veiculo;
 import java.util.Optional;
 
 public interface ReadDatabase {
-    Optional<Veiculo> read(String placa);
+    Optional<Veiculo> read(String id);
 }
