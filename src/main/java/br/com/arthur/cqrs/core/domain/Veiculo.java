@@ -1,6 +1,9 @@
 package br.com.arthur.cqrs.core.domain;
 
+import java.util.UUID;
+
 public class Veiculo {
+    private String id;
     private String marca;
     private String modelo;
     private String ano;
@@ -9,6 +12,7 @@ public class Veiculo {
     private String cor;
 
     public static class Builder {
+        private String id;
         private String marca;
         private String modelo;
         private String ano;
@@ -89,5 +93,13 @@ public class Veiculo {
 
     public String getCor() {
         return cor;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

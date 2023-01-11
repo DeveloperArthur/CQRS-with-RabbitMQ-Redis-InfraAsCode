@@ -8,6 +8,8 @@ import br.com.arthur.cqrs.integrationtests.mocks.WriteDatabaseMock;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.UUID;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -23,12 +25,14 @@ public class SalvaVeiculoTest {
                 .comPlaca("IAL-0989")
                 .comCor("Amarelo")
                 .build();
+        String id = String.valueOf(UUID.randomUUID());
+        veiculo.setId(id);
 
         SalvaVeiculo command = new SalvaVeiculo(new WriteDatabaseMock(), new QueueMessengerMock());
         command.write(veiculo);
 
         //checar se o veiculo existe no banco
-        Veiculo veiculoNoBanco = WriteDatabaseMock.veiculosWriteDBMock.get(veiculo.getPlaca());
+        Veiculo veiculoNoBanco = WriteDatabaseMock.veiculosWriteDBMock.get(veiculo.getId());
         Assertions.assertNotNull(veiculoNoBanco);
     }
 

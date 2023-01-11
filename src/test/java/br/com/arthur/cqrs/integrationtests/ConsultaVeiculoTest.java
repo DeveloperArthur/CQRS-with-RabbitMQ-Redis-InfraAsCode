@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.mockito.Mockito.*;
 
@@ -26,12 +27,14 @@ public class ConsultaVeiculoTest {
                 .comPlaca("MBY-1670")
                 .comCor("Preto")
                 .build();
-        ReadDatabaseMock.veiculosReadDBMock.put(veiculoInserido.getPlaca(), veiculoInserido);
+        String idGerado = String.valueOf(UUID.randomUUID());
+        veiculoInserido.setId(idGerado);
+        ReadDatabaseMock.veiculosReadDBMock.put(veiculoInserido.getId(), veiculoInserido);
 
         CachingService cachingService = mock(CachingService.class);
 
         ConsultaVeiculo query = new ConsultaVeiculo(new ReadDatabaseMock(), cachingService);
-        Optional<Veiculo> veiculoOptional = query.read("MBY-1670");
+        Optional<Veiculo> veiculoOptional = query.read(idGerado);
 
         Assertions.assertNotNull(veiculoOptional.get());
         verify(cachingService).salva(veiculoOptional.get());
@@ -48,12 +51,14 @@ public class ConsultaVeiculoTest {
                 .comPlaca("KDC-1191")
                 .comCor("Branco")
                 .build();
-        CachingServiceMock.veiculosCachingMock.put(veiculoInserido.getPlaca(), veiculoInserido);
+        String idGerado = String.valueOf(UUID.randomUUID());
+        veiculoInserido.setId(idGerado);
+        CachingServiceMock.veiculosCachingMock.put(veiculoInserido.getId(), veiculoInserido);
 
         ReadDatabase readDatabase = mock(ReadDatabase.class);
 
         ConsultaVeiculo query = new ConsultaVeiculo(readDatabase, new CachingServiceMock());
-        Optional<Veiculo> veiculoOptional = query.read("KDC-1191");
+        Optional<Veiculo> veiculoOptional = query.read(idGerado);
 
         Assertions.assertNotNull(veiculoOptional.get());
         verify(readDatabase, never()).read("KDC-1191");

@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
+import java.util.UUID;
 
 public class TestCoreEndToEnd {
     @Test
@@ -23,21 +24,23 @@ public class TestCoreEndToEnd {
                 .comPlaca("JTH-7774")
                 .comCor("Branco")
                 .build();
+        String id = String.valueOf(UUID.randomUUID());
+        veiculo.setId(id);
 
         SalvaVeiculo command = new SalvaVeiculo(new WriteDatabaseMock(), new QueueMessengerMock());
         command.write(veiculo);
 
         //checa se gravou no banco de write
-        Assertions.assertNotNull(WriteDatabaseMock.veiculosWriteDBMock.get(veiculo.getPlaca()));
+        Assertions.assertNotNull(WriteDatabaseMock.veiculosWriteDBMock.get(veiculo.getId()));
         //checa se a fila enviou o veiculo para o banco de read
-        Assertions.assertNotNull(ReadDatabaseMock.veiculosReadDBMock.get(veiculo.getPlaca()));
+        Assertions.assertNotNull(ReadDatabaseMock.veiculosReadDBMock.get(veiculo.getId()));
 
         ConsultaVeiculo query = new ConsultaVeiculo(new ReadDatabaseMock(), new CachingServiceMock());
-        Optional<Veiculo> veiculoOptional = query.read(veiculo.getPlaca());
+        Optional<Veiculo> veiculoOptional = query.read(veiculo.getId());
 
         //checa veiculo no banco de read, nao deve ser nulo
         Assertions.assertNotNull(veiculoOptional.get());
         //checa se veiculo foi gravado no cache
-        Assertions.assertNotNull(CachingServiceMock.veiculosCachingMock.get(veiculo.getPlaca()));
+        Assertions.assertNotNull(CachingServiceMock.veiculosCachingMock.get(veiculo.getId()));
     }
 }

@@ -3,6 +3,7 @@ package br.com.arthur.cqrs.infra.dao;
 import br.com.arthur.cqrs.core.domain.Veiculo;
 
 public class VeiculoJson {
+    private String id;
     private String marca;
     private String modelo;
     private String ano;
@@ -11,6 +12,7 @@ public class VeiculoJson {
     private String cor;
 
     public VeiculoJson(Veiculo veiculo) {
+        this.id = veiculo.getId();
         this.ano = veiculo.getAno();
         this.cor = veiculo.getCor();
         this.marca = veiculo.getMarca();
@@ -67,6 +69,14 @@ public class VeiculoJson {
 
     public void setCor(String cor) {
         this.cor = cor;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Veiculo converte() {

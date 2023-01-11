@@ -3,6 +3,7 @@ package br.com.arthur.cqrs.ports.web;
 import br.com.arthur.cqrs.core.domain.Veiculo;
 
 public class VeiculoDto {
+    private String id;
     private String marca;
     private String modelo;
     private String ano;
@@ -11,6 +12,7 @@ public class VeiculoDto {
     private String cor;
 
     public VeiculoDto(Veiculo veiculo) {
+        this.id = veiculo.getId();
         this.ano = veiculo.getAno();
         this.cor = veiculo.getCor();
         this.marca = veiculo.getMarca();
@@ -67,6 +69,14 @@ public class VeiculoDto {
 
     public void setCor(String cor) {
         this.cor = cor;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Veiculo converte() {
