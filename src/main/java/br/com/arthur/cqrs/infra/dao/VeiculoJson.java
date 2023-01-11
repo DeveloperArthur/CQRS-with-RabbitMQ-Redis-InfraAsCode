@@ -80,7 +80,7 @@ public class VeiculoJson {
     }
 
     public Veiculo converte() {
-        return new Veiculo.Builder()
+        Veiculo veiculo = new Veiculo.Builder()
                 .comAno(this.ano)
                 .comCor(this.cor)
                 .comMarca(this.marca)
@@ -88,5 +88,7 @@ public class VeiculoJson {
                 .comPlaca(this.placa)
                 .comRenavam(this.renavam)
                 .build();
+        veiculo.setId(this.id);
+        return veiculo;
     }
 }
