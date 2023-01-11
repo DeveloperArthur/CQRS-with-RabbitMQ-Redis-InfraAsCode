@@ -1,7 +1,7 @@
 package br.com.arthur.cqrs.core.service;
 
-import br.com.arthur.cqrs.adapters.QueueMessenger;
-import br.com.arthur.cqrs.adapters.WriteDatabase;
+import br.com.arthur.cqrs.adapters.gateways.QueueMessenger;
+import br.com.arthur.cqrs.adapters.gateways.WriteDatabase;
 import br.com.arthur.cqrs.core.domain.Veiculo;
 
 public class CommandService {

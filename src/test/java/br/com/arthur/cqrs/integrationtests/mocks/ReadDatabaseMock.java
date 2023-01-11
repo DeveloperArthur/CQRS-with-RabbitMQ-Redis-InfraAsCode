@@ -1,6 +1,6 @@
 package br.com.arthur.cqrs.integrationtests.mocks;
 
-import br.com.arthur.cqrs.adapters.ReadDatabase;
+import br.com.arthur.cqrs.adapters.gateways.ReadDatabase;
 import br.com.arthur.cqrs.core.domain.Veiculo;
 
 import java.util.HashMap;

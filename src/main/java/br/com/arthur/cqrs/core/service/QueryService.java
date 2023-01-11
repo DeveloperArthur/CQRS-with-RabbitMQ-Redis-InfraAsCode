@@ -1,7 +1,7 @@
 package br.com.arthur.cqrs.core.service;
 
-import br.com.arthur.cqrs.adapters.CachingService;
-import br.com.arthur.cqrs.adapters.ReadDatabase;
+import br.com.arthur.cqrs.adapters.gateways.CachingService;
+import br.com.arthur.cqrs.adapters.gateways.ReadDatabase;
 import br.com.arthur.cqrs.core.domain.Veiculo;
 
 import java.util.Optional;

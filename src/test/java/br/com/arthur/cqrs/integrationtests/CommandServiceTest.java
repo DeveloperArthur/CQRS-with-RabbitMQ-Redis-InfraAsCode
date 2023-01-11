@@ -1,6 +1,6 @@
 package br.com.arthur.cqrs.integrationtests;
 
-import br.com.arthur.cqrs.adapters.QueueMessenger;
+import br.com.arthur.cqrs.adapters.gateways.QueueMessenger;
 import br.com.arthur.cqrs.core.service.CommandService;
 import br.com.arthur.cqrs.core.domain.Veiculo;
 import br.com.arthur.cqrs.integrationtests.mocks.QueueMessengerMock;
