@@ -38,6 +38,7 @@ Startar banco de dados de leitura:
 
     json-server --host 192.168.1.4 -p 3000 writedb.json
 
-Subir Container RabbitMQ:
+Subir containers:
 
-    docker run -d  --name rabbitmq -p 15672:15672 rabbitmq:3-management
+    docker-compose up
+Obs: executar na pasta que tem o **docker-compose.yml**
