@@ -1,6 +1,6 @@
 package br.com.arthur.cqrs.integrationtests;
 
-import br.com.arthur.cqrs.core.gateways.QueueMessenger;
+import br.com.arthur.cqrs.core.gateways.EventHandler;
 import br.com.arthur.cqrs.core.service.SalvaVeiculo;
 import br.com.arthur.cqrs.core.domain.Veiculo;
 import br.com.arthur.cqrs.integrationtests.mocks.QueueMessengerMock;
@@ -39,12 +39,12 @@ public class SalvaVeiculoTest {
 
     @Test
     public void deveEnviarVeiculoParaQueueMessenger(){
-        QueueMessenger queueMessenger = mock(QueueMessenger.class);
+        EventHandler eventHandler = mock(EventHandler.class);
 
         Veiculo veiculo = new Veiculo();
-        SalvaVeiculo command = new SalvaVeiculo(new WriteDatabaseMock(), queueMessenger);
+        SalvaVeiculo command = new SalvaVeiculo(new WriteDatabaseMock(), eventHandler);
         command.write(veiculo);
 
-        verify(queueMessenger).envia(veiculo);
+        verify(eventHandler).envia(veiculo);
     }
 }

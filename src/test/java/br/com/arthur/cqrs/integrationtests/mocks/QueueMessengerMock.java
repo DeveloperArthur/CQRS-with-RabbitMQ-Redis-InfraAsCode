@@ -1,10 +1,10 @@
 package br.com.arthur.cqrs.integrationtests.mocks;
 
-import br.com.arthur.cqrs.core.gateways.QueueMessenger;
+import br.com.arthur.cqrs.core.gateways.EventHandler;
 import br.com.arthur.cqrs.core.domain.Veiculo;
 import br.com.arthur.cqrs.core.gateways.ReadDatabase;
 
-public class QueueMessengerMock implements QueueMessenger {
+public class QueueMessengerMock implements EventHandler {
     private ReadDatabaseMock readDatabase;
 
     public QueueMessengerMock(ReadDatabase readDatabase){

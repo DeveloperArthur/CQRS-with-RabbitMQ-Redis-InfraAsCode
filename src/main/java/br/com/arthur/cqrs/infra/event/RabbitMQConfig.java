@@ -1,4 +1,4 @@
-package br.com.arthur.cqrs.infra.queue;
+package br.com.arthur.cqrs.infra.event;
 
 
 import org.springframework.amqp.core.Queue;
