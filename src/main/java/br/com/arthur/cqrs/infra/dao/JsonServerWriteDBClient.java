@@ -16,6 +16,7 @@ public class JsonServerWriteDBClient implements WriteDatabase {
 
     @Override
     public Veiculo write(Veiculo veiculo) {
+        System.out.println("Salvando no banco");
         try {
             RestTemplate restTemplate = new RestTemplate();
 

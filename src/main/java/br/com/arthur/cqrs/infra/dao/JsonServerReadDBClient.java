@@ -16,6 +16,7 @@ public class JsonServerReadDBClient implements ReadDatabase {
 
     @Override
     public Optional<Veiculo> read(String id) {
+        System.out.println("Veiculo não está no cache, buscando no banco...");
         RestTemplate restTemplate = new RestTemplate();
 
         ResponseEntity<VeiculoJson> response = restTemplate.exchange(
