@@ -4,6 +4,7 @@ import br.com.arthur.cqrs.core.gateways.QueueMessenger;
 import br.com.arthur.cqrs.core.service.SalvaVeiculo;
 import br.com.arthur.cqrs.core.domain.Veiculo;
 import br.com.arthur.cqrs.integrationtests.mocks.QueueMessengerMock;
+import br.com.arthur.cqrs.integrationtests.mocks.ReadDatabaseMock;
 import br.com.arthur.cqrs.integrationtests.mocks.WriteDatabaseMock;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -28,7 +29,7 @@ public class SalvaVeiculoTest {
         String id = String.valueOf(UUID.randomUUID());
         veiculo.setId(id);
 
-        SalvaVeiculo command = new SalvaVeiculo(new WriteDatabaseMock(), new QueueMessengerMock());
+        SalvaVeiculo command = new SalvaVeiculo(new WriteDatabaseMock(), new QueueMessengerMock(new ReadDatabaseMock()));
         command.write(veiculo);
 
         //checar se o veiculo existe no banco

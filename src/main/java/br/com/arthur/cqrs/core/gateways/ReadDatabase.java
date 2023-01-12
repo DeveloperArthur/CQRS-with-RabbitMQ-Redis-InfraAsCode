@@ -6,4 +6,6 @@ import java.util.Optional;
 
 public interface ReadDatabase {
     Optional<Veiculo> read(String id);
+
+    void sincronizaBancos(Veiculo veiculo);
 }

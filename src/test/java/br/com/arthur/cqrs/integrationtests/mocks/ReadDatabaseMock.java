@@ -13,4 +13,9 @@ public class ReadDatabaseMock implements ReadDatabase {
     public Optional<Veiculo> read(String id) {
         return Optional.of(veiculosReadDBMock.get(id));
     }
+
+    @Override
+    public void sincronizaBancos(Veiculo veiculo) {
+        ReadDatabaseMock.veiculosReadDBMock.put(veiculo.getId(), veiculo);
+    }
 }

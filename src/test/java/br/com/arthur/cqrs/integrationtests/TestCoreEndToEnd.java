@@ -27,7 +27,7 @@ public class TestCoreEndToEnd {
         String id = String.valueOf(UUID.randomUUID());
         veiculo.setId(id);
 
-        SalvaVeiculo command = new SalvaVeiculo(new WriteDatabaseMock(), new QueueMessengerMock());
+        SalvaVeiculo command = new SalvaVeiculo(new WriteDatabaseMock(), new QueueMessengerMock(new ReadDatabaseMock()));
         command.write(veiculo);
 
         //checa se gravou no banco de write
