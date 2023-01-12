@@ -30,14 +30,6 @@ Startar Stopar Memcached (default port = 11211):
     brew services restart memcached
     brew services stop memcached
 
-Startar banco de dados de escrita:
-    
-    json-server --host 192.168.1.4 -p 4000 readdb.json
-
-Startar banco de dados de leitura:
-
-    json-server --host 192.168.1.4 -p 3000 writedb.json
-
 Subir containers:
 
     docker-compose up
