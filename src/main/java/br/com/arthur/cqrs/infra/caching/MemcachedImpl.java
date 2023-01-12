@@ -15,7 +15,7 @@ public class MemcachedImpl implements CachingService {
 
     @Override
     public Optional<Veiculo> get(String id) {
-        System.out.println("Buscando no cache");
+        System.out.println("Buscando do cache");
         MemcachedClient memcached = MemcachedSingleton.getInstancia(hostname);
         VeiculoDtoCache veiculoRetornadoPeloCache = (VeiculoDtoCache) memcached.get(id);
         if (veiculoRetornadoPeloCache == null) return Optional.empty();
