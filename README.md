@@ -1,4 +1,5 @@
-Implementação do pattern CQRS, utilizando mensageria com RabbitMQ e serviço de cache com Memcached.
+Implementação do pattern CQRS utilizando mensageria com RabbitMQ, serviço de cache com Redis e Databases com json-server.
+
 Arquitetura física da aplicação:
 ![obj](arquitetura.jpeg)
 
