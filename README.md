@@ -49,7 +49,7 @@ Nesse momento a aplicação deve logar:
 
     LOG: Salvando no banco
 
-Após gravar no banco de dados, o backend irá enviar o payload para uma fila do RabbitMQ:
+**Consistência eventual**: após gravar no banco de dados, o backend irá enviar o payload para uma fila do RabbitMQ:
 
     LOG: Enviando mensagem para RabbitMQ
 
