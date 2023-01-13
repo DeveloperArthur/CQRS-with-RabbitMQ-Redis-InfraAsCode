@@ -1,12 +1,15 @@
-#docker run -d  --name rabbitmq -p 15672:15672 rabbitmq:3-management
-#docker run -d -p 4000:80 -v json-server/readdb.json:/data/db.json clue/json-server
-#docker run -d -p 3000:80 -v json-server/writedb.json:/data/db.json clue/json-server
 services:
   rabbitmq:
     image: rabbitmq:3-management
     ports:
       - 15672:15672
       - 5672:5672
+
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
+    command: redis-server --save 60 1 --loglevel warning
 
   writedb:
     image: clue/json-server
