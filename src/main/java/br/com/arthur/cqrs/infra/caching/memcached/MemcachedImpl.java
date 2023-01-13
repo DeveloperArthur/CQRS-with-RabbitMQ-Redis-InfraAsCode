@@ -1,14 +1,17 @@
-package br.com.arthur.cqrs.infra.caching;
+package br.com.arthur.cqrs.infra.caching.memcached;
 
 import br.com.arthur.cqrs.core.domain.Veiculo;
 import br.com.arthur.cqrs.core.gateways.CachingService;
+import br.com.arthur.cqrs.infra.caching.VeiculoDtoCache;
 import net.spy.memcached.MemcachedClient;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
 @Component
+@Qualifier("MemcachedImpl")
 public class MemcachedImpl implements CachingService {
     @Value("${hostname}")
     private String hostname;

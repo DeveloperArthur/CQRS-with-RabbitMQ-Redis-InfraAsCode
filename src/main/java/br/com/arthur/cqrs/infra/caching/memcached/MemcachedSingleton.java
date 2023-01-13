@@ -1,4 +1,4 @@
-package br.com.arthur.cqrs.infra.caching;
+package br.com.arthur.cqrs.infra.caching.memcached;
 
 import net.spy.memcached.MemcachedClient;
 
