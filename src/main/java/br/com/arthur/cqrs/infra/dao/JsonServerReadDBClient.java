@@ -21,13 +21,18 @@ public class JsonServerReadDBClient implements ReadDatabase {
         System.out.println("Veiculo não está no cache, buscando no banco...");
         RestTemplate restTemplate = new RestTemplate();
 
-        ResponseEntity<VeiculoJson> response = restTemplate.exchange(
-                this.endpointDatabase + "/" + id, HttpMethod.GET,
-                null, VeiculoJson.class
-        );
+        ResponseEntity<VeiculoJson> response = null;
+        try {
+             response = restTemplate.exchange(
+                    this.endpointDatabase + "/" + id, HttpMethod.GET,
+                    null, VeiculoJson.class
+            );
+        } catch (Exception e){
+            return Optional.empty();
+        }
 
         if (response.getBody() != null) return Optional.of(response.getBody().converte());
-        return null;
+        return Optional.empty();
     }
 
     @Override
