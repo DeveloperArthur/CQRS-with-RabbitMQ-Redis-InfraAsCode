@@ -3,6 +3,10 @@ Implementação do pattern CQRS utilizando mensageria com RabbitMQ, serviço de 
 Arquitetura física da aplicação:
 ![obj](arquitetura.jpeg)
 
+Infra como código utilizando Docker Compose:
+- Todos os componentes externos da aplicação rodam em containers através do Docker Compose
+    ![obj](iac.png)
+
 Design Patterns utilizados: 
 - Builder
 - Singleton
@@ -22,6 +26,11 @@ Dessa forma o CORE (Domain e Use Case) fica protegido, pois os dispositivos de I
 
 Inicializar serviços externos:
 
+Subir containers:
+
+    docker-compose up
+Obs: executar na pasta que tem o **docker-compose.yml**
+
 Verificar se porta está em funcionamento na máquina:
     
     lsof -i tcp:PORT
@@ -30,8 +39,3 @@ Startar Stopar Memcached (default port = 11211):
 
     brew services restart memcached
     brew services stop memcached
-
-Subir containers:
-
-    docker-compose up
-Obs: executar na pasta que tem o **docker-compose.yml**
