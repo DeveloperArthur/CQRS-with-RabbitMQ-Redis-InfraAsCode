@@ -5,11 +5,11 @@ Implementação do pattern CQRS utilizando mensageria com RabbitMQ, serviço de 
 Todo o CORE da aplicação foi escrito com TDD, os próprios testes servem como documentação da aplicação e como roteiro para teste manual.
 
 ### Arquitetura física da aplicação:
-![obj](arquitetura.jpeg)
+![obj](assets/arquitetura.jpeg)
 
 Infra como código utilizando Docker Compose:
 - Todos os componentes externos da aplicação rodam em containers através do Docker Compose
-    ![obj](iac.png)
+    ![obj](assets/iac.png)
 
 Design Patterns utilizados: 
 - Builder
@@ -20,7 +20,7 @@ Programação reativa não bloqueante utilizada para enviar a mensagem para a fi
 Arquitetura lógica da aplicação desenvolvida utilizando pattern Ports and Adapters:
 
 ### Arquitetura lógica na visualização Onion:
-![obj](arquitetura-onion.jpeg)
+![obj](assets/arquitetura-onion.jpeg)
 
 A camada de Ports (Web) irá invocar a camada de Application, que irá tratar os dados recebidos e passar para o CORE.
 
