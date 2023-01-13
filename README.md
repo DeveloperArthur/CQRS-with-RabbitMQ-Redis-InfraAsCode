@@ -1,32 +1,34 @@
-Implementação do pattern CQRS utilizando mensageria com RabbitMQ, serviço de cache com Redis e Databases com json-server.
-
 # Documentação técnica:
 
-Todo o CORE da aplicação foi escrito com TDD, os próprios testes servem como documentação da aplicação e como roteiro para teste manual.
-
 ### Arquitetura física da aplicação:
-![obj](assets/arquitetura.jpeg)
+![obj](assets/arquitetura-fisica.jpeg)
 
 Infra como código utilizando Docker Compose:
 - Todos os componentes externos da aplicação rodam em containers através do Docker Compose
     ![obj](assets/iac.png)
 
-Design Patterns utilizados: 
-- Builder
-- Singleton
-    
-Programação reativa não bloqueante utilizada para enviar a mensagem para a fila.
-
-Arquitetura lógica da aplicação desenvolvida utilizando pattern Ports and Adapters:
-
 ### Arquitetura lógica na visualização Onion:
 ![obj](assets/arquitetura-onion.jpeg)
+
+Todo o CORE da aplicação foi escrito com TDD, os próprios testes servem como documentação da aplicação e como roteiro para teste manual.
 
 A camada de Ports (Web) irá invocar a camada de Application, que irá tratar os dados recebidos e passar para o CORE.
 
 E a camada de Infra (RabbitMQ, Redis, Memcached, WriteDatabase, ReadDatabase) devem seguir um contrato de Interface do CORE, utilizando a Inversão de Dependencia do SOLID.
 
 Dessa forma o CORE (Domain e Use Case) fica protegido, pois os dispositivos de I/O externos dependem do CORE, mas o CORE não depende de nenhum componente externo, é um núcleo completamente isolado.
+
+Arquitetura lógica da aplicação desenvolvida utilizando pattern Ports and Adapters:
+
+Implementação do pattern CQRS utilizando Java no backend, mensageria com RabbitMQ, serviço de cache com Redis e Databases com json-server.
+
+Primeiramente foi implementado serviço de cache com Memcached, e depois, foi implementado serviço de cache com Redis.
+
+Design Patterns utilizados:
+- Builder
+- Singleton
+
+Programação reativa não bloqueante utilizada para enviar a mensagem para a fila.
 
 # Documentação funcional
 
