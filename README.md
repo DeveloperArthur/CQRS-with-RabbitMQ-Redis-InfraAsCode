@@ -1,5 +1,7 @@
 Implementação do pattern CQRS utilizando mensageria com RabbitMQ, serviço de cache com Redis e Databases com json-server.
 
+Todo o CORE da aplicação foi escrito com TDD, os próprios testes servem como documentação da aplicação e como roteiro para teste manual
+
 Arquitetura física da aplicação:
 ![obj](arquitetura.jpeg)
 
