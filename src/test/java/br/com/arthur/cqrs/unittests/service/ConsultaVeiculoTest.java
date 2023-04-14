@@ -1,23 +1,18 @@
-package br.com.arthur.cqrs.integrationtests;
+package br.com.arthur.cqrs.unittests.service;
 
 import br.com.arthur.cqrs.AbstractTest;
 import br.com.arthur.cqrs.core.gateways.CachingService;
 import br.com.arthur.cqrs.core.gateways.ReadDatabase;
 import br.com.arthur.cqrs.core.domain.Veiculo;
 import br.com.arthur.cqrs.core.service.ConsultaVeiculo;
-import br.com.arthur.cqrs.integrationtests.mocks.CachingServiceMock;
-import br.com.arthur.cqrs.integrationtests.mocks.ReadDatabaseMock;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
-import java.util.UUID;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-
-import static org.mockito.Mockito.*;
 
 public class ConsultaVeiculoTest extends AbstractTest {
     @Mock

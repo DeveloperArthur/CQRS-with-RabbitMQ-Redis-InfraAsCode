@@ -3,7 +3,7 @@ package br.com.arthur.cqrs;
 import br.com.arthur.cqrs.core.domain.Veiculo;
 
 public abstract class AbstractTest {
-
+  protected static final String ID_VEICULO = "id_veiculo";
   protected static final String MARCA = "CHERY";
   protected static final String MODELO = "Tiggo 2.0 16V Aut. 5p";
   protected static final String ANO = "2013";
