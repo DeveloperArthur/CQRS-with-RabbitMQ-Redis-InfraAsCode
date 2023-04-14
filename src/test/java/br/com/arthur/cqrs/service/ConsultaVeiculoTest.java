@@ -1,4 +1,4 @@
-package br.com.arthur.cqrs.unittests.service;
+package br.com.arthur.cqrs.service;
 
 import br.com.arthur.cqrs.AbstractTest;
 import br.com.arthur.cqrs.core.gateways.CachingService;

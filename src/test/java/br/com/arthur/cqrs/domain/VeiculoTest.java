@@ -1,4 +1,4 @@
-package br.com.arthur.cqrs.unittests.domain;
+package br.com.arthur.cqrs.domain;
 
 import br.com.arthur.cqrs.AbstractTest;
 import br.com.arthur.cqrs.core.domain.Veiculo;
