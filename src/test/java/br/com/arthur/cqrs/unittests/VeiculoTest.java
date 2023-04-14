@@ -1,41 +1,23 @@
 package br.com.arthur.cqrs.unittests;
 
+import br.com.arthur.cqrs.AbstractTest;
 import br.com.arthur.cqrs.core.domain.Veiculo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class VeiculoTest {
+public class VeiculoTest extends AbstractTest {
 
     @Test
-    public void builderDeveCriarVeiculoComSucesso(){
-        Veiculo veiculo = new Veiculo.Builder()
-                .comMarca("CHERY")
-                .comModelo("Tiggo 2.0 16V Aut. 5p")
-                .comAno("2013")
-                .comRenavam("63843842707")
-                .comPlaca("IAL-0989")
-                .comCor("Amarelo")
-                .build();
-
-        Assertions.assertEquals("CHERY", veiculo.getMarca());
-        Assertions.assertEquals("Tiggo 2.0 16V Aut. 5p", veiculo.getModelo());
-        Assertions.assertEquals("2013", veiculo.getAno());
-        Assertions.assertEquals("63843842707", veiculo.getRenavam());
-        Assertions.assertEquals("IAL-0989", veiculo.getPlaca());
-        Assertions.assertEquals("Amarelo", veiculo.getCor());
+    public void builderDeveCriarVeiculoComSucesso_quandoVeiculoTiverRenavamValido(){
+        Assertions.assertDoesNotThrow(() -> {
+            Veiculo veiculo = criaVeiculoFakeComRenavamValido();
+        });
     }
 
     @Test
-    public void builderNaoDeveCriarVeiculoComSucesso(){
+    public void builderNaoDeveCriarVeiculoComSucesso_quandoVeiculoNaoTiverRenavamValido(){
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            Veiculo veiculo = new Veiculo.Builder()
-                    .comMarca("CHERY")
-                    .comModelo("Tiggo 2.0 16V Aut. 5p")
-                    .comAno("2013")
-                    .comRenavam("63")
-                    .comPlaca("IAL-0989")
-                    .comCor("Amarelo")
-                    .build();
+            Veiculo veiculo = criaVeiculoFakeComRenavamInvalido();
         });
     }
 
@@ -43,7 +25,7 @@ public class VeiculoTest {
     public void deveRetornarRenavamInvalido(){
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             Veiculo veiculo = new Veiculo();
-            veiculo.validacaoDigitosRenavam("123");
+            veiculo.validacaoDigitosRenavam(RENAVAM_INVALIDO);
         });
     }
 
@@ -51,7 +33,7 @@ public class VeiculoTest {
     public void naoDeveRetornarRenavamInvalido(){
         Assertions.assertDoesNotThrow(() -> {
             Veiculo veiculo = new Veiculo();
-            veiculo.validacaoDigitosRenavam("12345678900");
+            veiculo.validacaoDigitosRenavam(RENAVAM_VALIDO);
         });
     }
 }
