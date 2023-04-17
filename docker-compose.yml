@@ -16,11 +16,11 @@ services:
     ports:
       - 4000:80
     volumes:
-      - "/Users/arthurdossantosalmeida/projetos/cqrs/json-server/readdb.json:/data/db.json"
+      - "/Users/arthurdossantosalmeida/projetos/cqrs/json-server/writedb.json:/data/db.json"
 
   readdb:
     image: clue/json-server
     ports:
       - 3000:80
     volumes:
-      - "/Users/arthurdossantosalmeida/projetos/cqrs/json-server/writedb.json:/data/db.json"
+      - "/Users/arthurdossantosalmeida/projetos/cqrs/json-server/readdb.json:/data/db.json"
