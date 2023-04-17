@@ -23,28 +23,38 @@ public class RedisServiceClient implements CachingService {
 
     @Override
     public Optional<Veiculo> get(String id) {
-        Jedis jedis = RedisSingleton.getInstancia(hostname, port);
-        System.out.println("Buscando do cache");
-        String veiculoEmJson = jedis.get(id);
+        try {
+            Jedis jedis = RedisSingleton.getInstancia(hostname, port);
+            System.out.println("Buscando do cache");
+            String veiculoEmJson = jedis.get(id);
 
-        Gson gson = new Gson();
-        VeiculoDtoCache veiculoRetornadoPeloCache = gson.fromJson(veiculoEmJson, VeiculoDtoCache.class);
+            Gson gson = new Gson();
+            VeiculoDtoCache veiculoRetornadoPeloCache = gson.fromJson(veiculoEmJson, VeiculoDtoCache.class);
 
-        if (veiculoRetornadoPeloCache == null) return Optional.empty();
+            if (veiculoRetornadoPeloCache == null) return Optional.empty();
 
-        Veiculo veiculo = veiculoRetornadoPeloCache.converte();
-        return Optional.of(veiculo);
+            Veiculo veiculo = veiculoRetornadoPeloCache.converte();
+            return Optional.of(veiculo);
+        }catch (Exception e){
+            System.err.println("Ocorreu um erro ao tentar buscar veiculo no Redis");
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public void salva(Veiculo veiculo) {
-        VeiculoDtoCache veiculoCache = new VeiculoDtoCache(veiculo);
-        Jedis jedis = RedisSingleton.getInstancia(hostname, port);
+        try {
+            VeiculoDtoCache veiculoCache = new VeiculoDtoCache(veiculo);
+            Jedis jedis = RedisSingleton.getInstancia(hostname, port);
 
-        Gson gson = new Gson();
-        String veiculoEmJson = gson.toJson(veiculo);
+            Gson gson = new Gson();
+            String veiculoEmJson = gson.toJson(veiculo);
 
-        jedis.set(veiculoCache.getId(), veiculoEmJson);
-        System.out.println("Salvo no cache com sucesso");
+            jedis.set(veiculoCache.getId(), veiculoEmJson);
+            System.out.println("Salvo no cache com sucesso");
+        } catch (Exception e){
+            System.err.println("Ocorreu um erro ao tentar salvar veiculo no Redis");
+            throw new RuntimeException(e);
+        }
     }
 }

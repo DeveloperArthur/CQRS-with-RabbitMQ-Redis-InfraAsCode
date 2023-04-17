@@ -32,6 +32,11 @@ public class RabbitMQSender {
     }
 
     public void sendMessage(String message){
-        rabbitTemplate.convertAndSend(queue.getName(), message);
+        try {
+            rabbitTemplate.convertAndSend(queue.getName(), message);
+        } catch (Exception e){
+            System.err.println("Ocorreu um erro ao tentar enviar message para RabbitMQ");
+            throw new RuntimeException(e);
+        }
     }
 }
