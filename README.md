@@ -33,7 +33,7 @@ Programação reativa não bloqueante utilizada para enviar a mensagem para a fi
 
 # Testes automatizados
 Pirâmide de testes e ferramentas que foram utilizadas:
-![obj](assets/test-pyramid.jpeg)
+![obj](assets/test-pyramid-and-tools.jpeg)
 
 # Documentação funcional
 
