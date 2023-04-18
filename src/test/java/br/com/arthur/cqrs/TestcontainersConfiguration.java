@@ -1,6 +1,6 @@
 package br.com.arthur.cqrs;
 
-import br.com.arthur.cqrs.core.service.ConsultaVeiculo;
+import br.com.arthur.cqrs.core.gateways.ReadDatabase;
 import br.com.arthur.cqrs.infra.caching.redis.RedisServiceClient;
 import br.com.arthur.cqrs.infra.dao.JsonServerReadDBClient;
 import br.com.arthur.cqrs.infra.event.RabbitMQReceiver;
@@ -21,12 +21,7 @@ public class TestcontainersConfiguration {
   }
 
   @Bean
-  public ConsultaVeiculo beanConsultaVeiculo() {
-    return new ConsultaVeiculo(beanJsonServerReadDBClient(), beanRedisServiceClient());
-  }
-
-  @Bean
-  public JsonServerReadDBClient beanJsonServerReadDBClient(){
+  public ReadDatabase beanReadDatabase(){
     return new JsonServerReadDBClient();
   }
 
