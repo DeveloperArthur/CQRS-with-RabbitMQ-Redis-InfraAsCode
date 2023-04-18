@@ -20,17 +20,15 @@ public class SalvaVeiculo {
     }
 
     public Veiculo write(Veiculo veiculo) {
-        Veiculo veiculoSalvo = null;
-
         try {
-            veiculoSalvo = writeDatabase.write(veiculo);
-        } catch (JsonProcessingException e) {
+            Veiculo veiculoSalvo = writeDatabase.write(veiculo);
+            if (veiculoSalvo == null) {
+                throw new RuntimeException("Não foi possível salvar o veículo");
+            }
+            eventoDeVeiculoSalvo.envia(veiculoSalvo);
+            return veiculoSalvo;
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
-        if (veiculoSalvo == null) throw new RuntimeException("Não foi possível salvar o veículo");
-        eventoDeVeiculoSalvo.envia(veiculoSalvo);
-
-        return veiculoSalvo;
     }
 }
