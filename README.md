@@ -10,7 +10,7 @@ Infra como código utilizando Docker Compose:
 ### Arquitetura lógica na visualização Onion:
 ![obj](assets/arquitetura-onion.jpeg)
 
-Todo o CORE da aplicação foi escrito com TDD, e os testes complementam a [documentação funcional](#documentao-funcional).
+Todo o CORE da aplicação foi escrito com TDD, e os testes complementam a [documentação funcional](#documentação-funcional).
 
 A camada de Ports (Web) irá invocar a camada de Application, que irá tratar os dados recebidos e passar para o CORE.
 
