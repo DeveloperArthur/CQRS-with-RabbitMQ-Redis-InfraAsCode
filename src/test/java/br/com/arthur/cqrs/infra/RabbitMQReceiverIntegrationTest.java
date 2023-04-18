@@ -3,7 +3,7 @@ package br.com.arthur.cqrs.infra;
 import br.com.arthur.cqrs.AbstractTest;
 import br.com.arthur.cqrs.TestcontainersConfiguration;
 import br.com.arthur.cqrs.core.domain.Veiculo;
-import br.com.arthur.cqrs.core.service.ConsultaVeiculo;
+import br.com.arthur.cqrs.core.gateways.ReadDatabase;
 import br.com.arthur.cqrs.infra.event.RabbitMQReceiver;
 import com.google.gson.Gson;
 import java.util.Optional;
@@ -20,7 +20,7 @@ public class RabbitMQReceiverIntegrationTest extends AbstractTest {
   @Autowired
   RabbitMQReceiver rabbitMQReceiver;
   @Autowired
-  ConsultaVeiculo consultaVeiculo;
+  ReadDatabase readDatabase;
 
   @BeforeAll
   public static void startContainers() {
@@ -41,13 +41,15 @@ public class RabbitMQReceiverIntegrationTest extends AbstractTest {
   }
 
   @Test
-  public void deveSincronizarDadosNoReadDatabase(){
+  public void deveExistirVeiculoNoReadDatabase_quandoSincronizarDados(){
     String veiculoJson = criaVeiculoEmJson();
+    Veiculo veiculoExpected = new Gson().fromJson(veiculoJson, Veiculo.class);
 
+    //Método que recebe evento e sincroniza as bases de dados
     rabbitMQReceiver.receiveManage(veiculoJson);
 
-    Veiculo veiculoExpected = new Gson().fromJson(veiculoJson, Veiculo.class);
-    Optional<Veiculo> veiculoGravado = consultaVeiculo.read(ID_VEICULO);
+    //Buscando por id no json-server
+    Optional<Veiculo> veiculoGravado = readDatabase.read(ID_VEICULO);
 
     assertEqualsVeiculo(veiculoExpected, veiculoGravado.get());
   }
