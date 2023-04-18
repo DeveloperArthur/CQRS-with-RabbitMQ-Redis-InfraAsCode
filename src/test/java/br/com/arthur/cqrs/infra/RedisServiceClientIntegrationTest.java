@@ -38,13 +38,7 @@ public class RedisServiceClientIntegrationTest extends AbstractTest {
 
     Optional<Veiculo> veiculoOptional = redisClient.get(ID_VEICULO);
 
-    Assertions.assertEquals(veiculo.getId(), veiculoOptional.get().getId());
-    Assertions.assertEquals(veiculo.getMarca(), veiculoOptional.get().getMarca());
-    Assertions.assertEquals(veiculo.getModelo(), veiculoOptional.get().getModelo());
-    Assertions.assertEquals(veiculo.getAno(), veiculoOptional.get().getAno());
-    Assertions.assertEquals(veiculo.getRenavam(), veiculoOptional.get().getRenavam());
-    Assertions.assertEquals(veiculo.getPlaca(), veiculoOptional.get().getPlaca());
-    Assertions.assertEquals(veiculo.getCor(), veiculoOptional.get().getCor());
+    assertEqualsVeiculo(veiculo, veiculoOptional.get());
   }
 
   @Test

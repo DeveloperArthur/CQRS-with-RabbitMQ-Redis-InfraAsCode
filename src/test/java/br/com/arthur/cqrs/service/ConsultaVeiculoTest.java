@@ -30,19 +30,15 @@ public class ConsultaVeiculoTest extends AbstractTest {
     @Test
     public void deveRetornarVeiculoDoCache_quandoTiverVeiculoNoCache(){
         //Arrange
+        Veiculo veiculoExpected = criaVeiculoFakeComRenavamValido();
         Mockito.when(cachingService.get(Mockito.anyString()))
-            .thenReturn(Optional.of(criaVeiculoFakeComRenavamValido()));
+            .thenReturn(Optional.of(veiculoExpected));
 
         //Action
         Optional<Veiculo> veiculo = consultaVeiculo.read(ID_VEICULO);
 
         //Assert
-        Assertions.assertEquals(MARCA, veiculo.get().getMarca());
-        Assertions.assertEquals(MODELO, veiculo.get().getModelo());
-        Assertions.assertEquals(ANO, veiculo.get().getAno());
-        Assertions.assertEquals(RENAVAM_VALIDO, veiculo.get().getRenavam());
-        Assertions.assertEquals(PLACA, veiculo.get().getPlaca());
-        Assertions.assertEquals(COR, veiculo.get().getCor());
+        assertEqualsVeiculo(veiculoExpected, veiculo.get());
         Mockito.verify(readDatabase, Mockito.times(0))
             .read(Mockito.anyString());
     }
@@ -53,8 +49,9 @@ public class ConsultaVeiculoTest extends AbstractTest {
         Mockito.when(cachingService.get(Mockito.anyString()))
             .thenReturn(Optional.empty());
 
+        Veiculo veiculoExpected = criaVeiculoFakeComRenavamValido();
         Mockito.when(readDatabase.read(Mockito.anyString()))
-            .thenReturn(Optional.of(criaVeiculoFakeComRenavamValido()));
+            .thenReturn(Optional.of(veiculoExpected));
 
         Mockito.doNothing().when(cachingService).salva(Mockito.any());
 
@@ -62,12 +59,7 @@ public class ConsultaVeiculoTest extends AbstractTest {
         Optional<Veiculo> veiculo = consultaVeiculo.read(ID_VEICULO);
 
         //Assert
-        Assertions.assertEquals(MARCA, veiculo.get().getMarca());
-        Assertions.assertEquals(MODELO, veiculo.get().getModelo());
-        Assertions.assertEquals(ANO, veiculo.get().getAno());
-        Assertions.assertEquals(RENAVAM_VALIDO, veiculo.get().getRenavam());
-        Assertions.assertEquals(PLACA, veiculo.get().getPlaca());
-        Assertions.assertEquals(COR, veiculo.get().getCor());
+        assertEqualsVeiculo(veiculoExpected, veiculo.get());
         Mockito.verify(readDatabase, Mockito.times(1))
             .read(Mockito.anyString());
         Mockito.verify(cachingService, Mockito.times(1))
