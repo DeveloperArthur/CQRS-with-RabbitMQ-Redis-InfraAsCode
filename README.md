@@ -10,7 +10,7 @@ Infra como código utilizando Docker Compose:
 ### Arquitetura lógica na visualização Onion:
 ![obj](assets/arquitetura-onion.jpeg)
 
-Todo o CORE da aplicação foi escrito com TDD, os próprios testes servem como documentação da aplicação e como roteiro para teste manual.
+Todo o CORE da aplicação foi escrito com TDD, e os testes complementam a [documentação funcional](#documentao-funcional).
 
 A camada de Ports (Web) irá invocar a camada de Application, que irá tratar os dados recebidos e passar para o CORE.
 
@@ -19,6 +19,7 @@ E a camada de Infra (RabbitMQ, Redis, Memcached, WriteDatabase, ReadDatabase) de
 Dessa forma o CORE (Domain e Use Case) fica protegido, pois os dispositivos de I/O externos dependem do CORE, mas o CORE não depende de nenhum componente externo, é um núcleo completamente isolado.
 
 Arquitetura lógica da aplicação desenvolvida utilizando pattern Ports and Adapters:
+![obj](assets/arquitetura-hexagonal.jpeg)
 
 Implementação do pattern CQRS utilizando Java no backend, mensageria com RabbitMQ, serviço de cache com Redis e Databases com json-server.
 
@@ -29,6 +30,10 @@ Design Patterns utilizados:
 - Singleton
 
 Programação reativa não bloqueante utilizada para enviar a mensagem para a fila.
+
+# Testes automatizados
+Pirâmide de testes e ferramentas que foram utilizadas:
+![obj](assets/test-pyramid.jpeg)
 
 # Documentação funcional
 
