@@ -2,13 +2,12 @@ package br.com.arthur.cqrs.infra.caching.redis;
 
 import br.com.arthur.cqrs.core.domain.Veiculo;
 import br.com.arthur.cqrs.core.gateways.CachingService;
+import br.com.arthur.cqrs.infra.JsonUtilAdapterWithGson;
 import br.com.arthur.cqrs.infra.caching.VeiculoDtoCache;
-import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisCluster;
 
 import java.util.Optional;
 
@@ -28,8 +27,8 @@ public class RedisServiceClient implements CachingService {
             System.out.println("Buscando do cache");
             String veiculoEmJson = jedis.get(id);
 
-            Gson gson = new Gson();
-            VeiculoDtoCache veiculoRetornadoPeloCache = gson.fromJson(veiculoEmJson, VeiculoDtoCache.class);
+            VeiculoDtoCache veiculoRetornadoPeloCache = JsonUtilAdapterWithGson
+                .veiculoDtoCachefromJson(veiculoEmJson);
 
             if (veiculoRetornadoPeloCache == null) return Optional.empty();
 
@@ -47,8 +46,7 @@ public class RedisServiceClient implements CachingService {
             VeiculoDtoCache veiculoCache = new VeiculoDtoCache(veiculo);
             Jedis jedis = RedisSingleton.getInstancia(hostname, port);
 
-            Gson gson = new Gson();
-            String veiculoEmJson = gson.toJson(veiculo);
+            String veiculoEmJson = JsonUtilAdapterWithGson.toJson(veiculoCache);
 
             jedis.set(veiculoCache.getId(), veiculoEmJson);
             System.out.println("Salvo no cache com sucesso");

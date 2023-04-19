@@ -2,7 +2,7 @@ package br.com.arthur.cqrs.infra.event;
 
 import br.com.arthur.cqrs.core.domain.Veiculo;
 import br.com.arthur.cqrs.core.gateways.EventHandler;
-import com.google.gson.Gson;
+import br.com.arthur.cqrs.infra.JsonUtilAdapterWithGson;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,8 +16,7 @@ public class VeiculoSalvoEvent implements EventHandler {
     @Override
     public void envia(Veiculo veiculo) {
         System.out.println("Enviando mensagem para RabbitMQ");
-        Gson gson = new Gson();
-        String veiculoEmJson = gson.toJson(veiculo);
+        String veiculoEmJson = JsonUtilAdapterWithGson.toJson(veiculo);
         rabbitMQSender.notifyAsync(veiculoEmJson);
     }
 }

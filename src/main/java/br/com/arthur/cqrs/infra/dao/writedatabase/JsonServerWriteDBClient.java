@@ -2,9 +2,8 @@ package br.com.arthur.cqrs.infra.dao.writedatabase;
 
 import br.com.arthur.cqrs.core.domain.Veiculo;
 import br.com.arthur.cqrs.core.gateways.WriteDatabase;
-import br.com.arthur.cqrs.infra.dao.VeiculoJson;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import br.com.arthur.cqrs.infra.JsonUtilAdapterWithGson;
+import br.com.arthur.cqrs.infra.dao.VeiculoDtoDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -27,21 +26,21 @@ public class JsonServerWriteDBClient implements WriteDatabase {
     public Veiculo write(Veiculo veiculo) {
         System.out.println("Salvando no banco");
         try {
-            VeiculoJson veiculoDto = new VeiculoJson(veiculo);
-            String veiculoJson = new ObjectMapper().writeValueAsString(veiculoDto);
+            VeiculoDtoDatabase veiculoDtoDatabase = new VeiculoDtoDatabase(veiculo);
+            String veiculoJson = JsonUtilAdapterWithGson.toJson(veiculoDtoDatabase);
 
             HttpHeaders httpHeaders = new HttpHeaders();
             httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 
             HttpEntity<String> httpEntity = new HttpEntity<>(veiculoJson, httpHeaders);
 
-            ResponseEntity<VeiculoJson> response = restTemplate.exchange(
+            ResponseEntity<VeiculoDtoDatabase> response = restTemplate.exchange(
                     this.endpointDatabase, HttpMethod.POST,
-                    httpEntity, VeiculoJson.class
+                    httpEntity, VeiculoDtoDatabase.class
             );
             if (response.getBody() != null) return response.getBody().converte();
             return null;
-        }catch (JsonProcessingException e){
+        }catch (Exception e){
             throw new RuntimeException();
         }
     }

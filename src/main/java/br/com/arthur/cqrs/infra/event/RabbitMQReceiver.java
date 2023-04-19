@@ -2,7 +2,7 @@ package br.com.arthur.cqrs.infra.event;
 
 import br.com.arthur.cqrs.core.domain.Veiculo;
 import br.com.arthur.cqrs.core.gateways.ReadDatabase;
-import com.google.gson.Gson;
+import br.com.arthur.cqrs.infra.JsonUtilAdapterWithGson;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -18,8 +18,7 @@ public class RabbitMQReceiver {
     public void receiveManage(@Payload String message){
         System.out.println("Mensagem do RabbitMQ recebida");
         System.out.println("processando...");
-        Gson gson = new Gson();
-        Veiculo veiculo = gson.fromJson(message, Veiculo.class);
+        Veiculo veiculo = JsonUtilAdapterWithGson.veiculofromJson(message);
         readDatabase.sincronizaBancos(veiculo);
     }
 }

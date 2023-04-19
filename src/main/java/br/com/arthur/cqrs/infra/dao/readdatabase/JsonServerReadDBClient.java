@@ -2,9 +2,8 @@ package br.com.arthur.cqrs.infra.dao.readdatabase;
 
 import br.com.arthur.cqrs.core.domain.Veiculo;
 import br.com.arthur.cqrs.core.gateways.ReadDatabase;
-import br.com.arthur.cqrs.infra.dao.VeiculoJson;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import br.com.arthur.cqrs.infra.JsonUtilAdapterWithGson;
+import br.com.arthur.cqrs.infra.dao.VeiculoDtoDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -29,11 +28,11 @@ public class JsonServerReadDBClient implements ReadDatabase {
     public Optional<Veiculo> read(String id) {
         System.out.println("Veiculo não está no cache, buscando no banco...");
 
-        ResponseEntity<VeiculoJson> response = null;
+        ResponseEntity<VeiculoDtoDatabase> response = null;
         try {
              response = restTemplate.exchange(
                     this.endpointDatabase + "/" + id, HttpMethod.GET,
-                    null, VeiculoJson.class);
+                    null, VeiculoDtoDatabase.class);
 
             if (response.getBody() != null) {
                 return Optional.of(response.getBody().converte());
@@ -50,21 +49,21 @@ public class JsonServerReadDBClient implements ReadDatabase {
     public void sincronizaBancos(Veiculo veiculo) {
         System.out.println("Sincronizando bancos de dados");
         try {
-            VeiculoJson veiculoDto = new VeiculoJson(veiculo);
-            String veiculoJson = new ObjectMapper().writeValueAsString(veiculoDto);
+            VeiculoDtoDatabase veiculoDtoDatabase = new VeiculoDtoDatabase(veiculo);
+            String veiculoJson = JsonUtilAdapterWithGson.toJson(veiculoDtoDatabase);
 
             HttpHeaders httpHeaders = new HttpHeaders();
             httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 
             HttpEntity<String> httpEntity = new HttpEntity<>(veiculoJson, httpHeaders);
 
-            ResponseEntity<VeiculoJson> response = restTemplate.exchange(
+            ResponseEntity<VeiculoDtoDatabase> response = restTemplate.exchange(
                     this.endpointDatabase, HttpMethod.POST,
-                    httpEntity, VeiculoJson.class
+                    httpEntity, VeiculoDtoDatabase.class
             );
             if (response.getStatusCode() == HttpStatus.OK)
                 System.out.println("Bancos de dados sincronizados com sucesso");
-        }catch (JsonProcessingException e){
+        }catch (Exception e){
             throw new RuntimeException();
         }
     }

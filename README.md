@@ -28,6 +28,7 @@ Primeiramente foi implementado serviço de cache com Memcached, e depois, foi im
 Design Patterns utilizados:
 - Builder
 - Singleton
+- Adapter
 
 Programação reativa não bloqueante utilizada para enviar a mensagem para a fila.
 
