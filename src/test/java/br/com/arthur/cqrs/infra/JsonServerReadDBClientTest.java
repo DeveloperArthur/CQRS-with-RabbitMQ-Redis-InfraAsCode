@@ -2,7 +2,7 @@ package br.com.arthur.cqrs.infra;
 
 import br.com.arthur.cqrs.AbstractTest;
 import br.com.arthur.cqrs.core.domain.Veiculo;
-import br.com.arthur.cqrs.infra.dao.JsonServerReadDBClient;
+import br.com.arthur.cqrs.infra.dao.readdatabase.JsonServerReadDBClient;
 import br.com.arthur.cqrs.infra.dao.VeiculoJson;
 import java.util.Optional;
 import org.junit.jupiter.api.Assertions;
