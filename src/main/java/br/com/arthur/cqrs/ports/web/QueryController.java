@@ -15,7 +15,7 @@ public class QueryController {
     CQRSApplication application;
 
     @GetMapping("/{id}")
-    public ResponseEntity<VeiculoDto> read(@PathVariable String id){
+    public ResponseEntity<VeiculoDtoWeb> read(@PathVariable String id){
         return application.read(id);
     }
 }

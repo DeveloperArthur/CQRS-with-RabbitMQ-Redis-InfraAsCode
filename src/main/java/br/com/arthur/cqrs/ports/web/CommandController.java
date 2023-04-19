@@ -13,7 +13,7 @@ public class CommandController {
     CQRSApplication application;
 
     @PostMapping
-    public ResponseEntity<VeiculoDto> write(@RequestBody VeiculoDto dto){
+    public ResponseEntity<VeiculoDtoWeb> write(@RequestBody VeiculoDtoWeb dto){
         return application.write(dto);
     }
 }

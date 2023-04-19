@@ -1,7 +1,7 @@
 package br.com.arthur.cqrs;
 
 import br.com.arthur.cqrs.core.domain.Veiculo;
-import br.com.arthur.cqrs.infra.dao.VeiculoJson;
+import br.com.arthur.cqrs.infra.dao.VeiculoDtoDatabase;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -61,7 +61,7 @@ public abstract class AbstractTest {
     Assertions.assertEquals(expected.getCor(), actual.getCor());
   }
 
-  protected ResponseEntity<VeiculoJson> criaResponseEntityComBodyNull(){
+  protected ResponseEntity<VeiculoDtoDatabase> criaResponseEntityComBodyNull(){
     return new ResponseEntity<>(null, HttpStatus.OK);
   }
 

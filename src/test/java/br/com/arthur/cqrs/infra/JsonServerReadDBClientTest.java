@@ -3,7 +3,7 @@ package br.com.arthur.cqrs.infra;
 import br.com.arthur.cqrs.AbstractTest;
 import br.com.arthur.cqrs.core.domain.Veiculo;
 import br.com.arthur.cqrs.infra.dao.readdatabase.JsonServerReadDBClient;
-import br.com.arthur.cqrs.infra.dao.VeiculoJson;
+import br.com.arthur.cqrs.infra.dao.VeiculoDtoDatabase;
 import java.util.Optional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,7 +27,7 @@ public class JsonServerReadDBClientTest extends AbstractTest {
   @Test
   public void deveRetornarEmpty_quandoBodyDoResponseForNulo(){
     Mockito.when(restTemplate.exchange(Mockito.anyString(), Mockito.any(),
-            Mockito.any(), Mockito.eq(VeiculoJson.class)))
+            Mockito.any(), Mockito.eq(VeiculoDtoDatabase.class)))
         .thenReturn(criaResponseEntityComBodyNull());
 
     Optional<Veiculo> veiculo = client.read(ID_VEICULO);

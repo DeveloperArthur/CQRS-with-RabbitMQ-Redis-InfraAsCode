@@ -2,7 +2,7 @@ package br.com.arthur.cqrs.infra.dao;
 
 import br.com.arthur.cqrs.core.domain.Veiculo;
 
-public class VeiculoJson {
+public class VeiculoDtoDatabase {
     private String id;
     private String marca;
     private String modelo;
@@ -11,7 +11,7 @@ public class VeiculoJson {
     private String placa;
     private String cor;
 
-    public VeiculoJson(Veiculo veiculo) {
+    public VeiculoDtoDatabase(Veiculo veiculo) {
         this.id = veiculo.getId();
         this.ano = veiculo.getAno();
         this.cor = veiculo.getCor();
@@ -21,7 +21,7 @@ public class VeiculoJson {
         this.renavam = veiculo.getRenavam();
     }
 
-    public VeiculoJson() {}
+    public VeiculoDtoDatabase() {}
 
     public String getMarca() {
         return marca;

@@ -3,7 +3,7 @@ package br.com.arthur.cqrs.application;
 import br.com.arthur.cqrs.core.domain.Veiculo;
 import br.com.arthur.cqrs.core.service.ConsultaVeiculo;
 import br.com.arthur.cqrs.core.service.SalvaVeiculo;
-import br.com.arthur.cqrs.ports.web.VeiculoDto;
+import br.com.arthur.cqrs.ports.web.VeiculoDtoWeb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -17,17 +17,17 @@ public class CQRSApplication {
     @Autowired
     SalvaVeiculo salvaVeiculo;
 
-    public ResponseEntity<VeiculoDto> read(String id) {
+    public ResponseEntity<VeiculoDtoWeb> read(String id) {
         Optional<Veiculo> veiculoOptional = consultaVeiculo.read(id);
         if (veiculoOptional.isPresent())
-            return ResponseEntity.ok(new VeiculoDto(veiculoOptional.get()));
+            return ResponseEntity.ok(new VeiculoDtoWeb(veiculoOptional.get()));
 
         return ResponseEntity.notFound().build();
     }
 
-    public ResponseEntity<VeiculoDto> write(VeiculoDto dto) {
+    public ResponseEntity<VeiculoDtoWeb> write(VeiculoDtoWeb dto) {
         Veiculo veiculo = dto.converte();
         Veiculo veiculoSalvo = salvaVeiculo.write(veiculo);
-        return ResponseEntity.ok(new VeiculoDto(veiculoSalvo));
+        return ResponseEntity.ok(new VeiculoDtoWeb(veiculoSalvo));
     }
 }
