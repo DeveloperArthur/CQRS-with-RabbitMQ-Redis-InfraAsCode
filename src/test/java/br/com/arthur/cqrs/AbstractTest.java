@@ -1,7 +1,10 @@
 package br.com.arthur.cqrs;
 
 import br.com.arthur.cqrs.core.domain.Veiculo;
+import br.com.arthur.cqrs.infra.dao.VeiculoJson;
 import org.junit.jupiter.api.Assertions;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 public abstract class AbstractTest {
   protected static final String ID_VEICULO = "id_veiculo";
@@ -12,6 +15,7 @@ public abstract class AbstractTest {
   protected static final String RENAVAM_INVALIDO = "63";
   protected static final String PLACA = "IAL-0989";
   protected static final String COR = "Amarelo";
+  protected static final String ENDPOINT_MOCK = "http://endpoint.mock";
 
   protected Veiculo criaVeiculoFakeComRenavamValido(){
     return new Veiculo.Builder()
@@ -55,6 +59,10 @@ public abstract class AbstractTest {
     Assertions.assertEquals(expected.getRenavam(), actual.getRenavam());
     Assertions.assertEquals(expected.getPlaca(), actual.getPlaca());
     Assertions.assertEquals(expected.getCor(), actual.getCor());
+  }
+
+  protected ResponseEntity<VeiculoJson> criaResponseEntityComBodyNull(){
+    return new ResponseEntity<>(null, HttpStatus.OK);
   }
 
 }
